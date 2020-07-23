@@ -55,84 +55,26 @@ if __name__ == "__main__":
 
   denver_df.head()
 
-  print(round(denver_df['stars'].mean(),2))
-
   park_city_trails = park_city['trails']
   park_city_df = json_normalize(park_city_trails)
   park_city_df["location"] = "park_city"
-
-  print(round(park_city_df['stars'].mean(),2))
 
   moab_trails = moab['trails']
   moab_df = json_normalize(moab_trails)
   moab_df["location"] = "moab"
 
-  print(round(moab_df['stars'].mean(),2))
-
   sedona_trails = sedona['trails']
   sedona_df = json_normalize(sedona_trails)
   sedona_df["location"] = "sedona"
-
-  print(round(sedona_df['stars'].mean(),2))
 
   marin_county_trails = marin_county['trails']
   marin_county_df = json_normalize(marin_county_trails)
   marin_county_df["location"] = "marin_county"
 
-  print(round(marin_county_df['stars'].mean(),2))
-
   crested_butte_trails = crested_butte['trails']
   crested_butte_df = json_normalize(crested_butte_trails)
   crested_butte_df["location"] = "crested_butte"
 
-  print(round(crested_butte_df['stars'].mean(),2))
-
-  crested_butte_df.describe()
-
-  # Columns
-  crested_butte_df.columns
-
-  crested_butte_df.info()
-
-  cb_unique = crested_butte_df.copy()
-  cb_unique = cb_unique.groupby("difficulty")
-
-  cb_unique["difficulty"].unique()
-
-  crested_butte_df[crested_butte_df["difficulty"] == "green"]["stars"].mean()
-  crested_butte_df[crested_butte_df["difficulty"] == "greenBlue"]["stars"].mean()
-  crested_butte_df[crested_butte_df["difficulty"] == "blue"]["stars"].mean()
-  crested_butte_df[crested_butte_df["difficulty"] == "blueBlack"]["stars"].mean()
-  crested_butte_df[crested_butte_df["difficulty"] == "black"]["stars"].mean()
-  crested_butte_df[crested_butte_df["difficulty"] == "dblack"]["stars"].mean()
-
-  crested_butte_df.groupby("difficulty")["stars"].mean()
-
-  crested_butte_df.groupby("difficulty")["stars"].agg([min,max,sum])
-
-  crested_butte_df.groupby("difficulty")["stars"].mean()
-
-  crested_butte_df.pivot_table(values="stars",index="difficulty", aggfunc=[np.mean, np.median, np.min, np.max])
-
-  crested_butte_df.set_index("difficulty")
-
-  crested_butte_df.sort_index()
-
-  crested_butte_df.corr(method ='pearson')
-
-  text = " ".join(review for review in crested_butte_df.summary)
-  print ("There are {} words in the combination of all review.".format(len(text)))
-
-  crested_butte_df["summary"].head()
-
-  stopwords = set(STOPWORDS)
-  stopwords.update(["singletrack","trail","great","ride","climb","descent"])
-
-  wordcloud = WordCloud(stopwords=stopwords).generate(text)
-
-  plt.imshow(wordcloud, interpolation='bilinear')
-  plt.axis("off")
-  plt.show()
 
   # MTB_Trail_Data_EDA
 
@@ -146,13 +88,7 @@ if __name__ == "__main__":
   print ("There are {} words in the combination of all review.".format(len(text)))
 
   stopwords = set(STOPWORDS)
-  stopwords.update(["This,","An"])
-
-  wordcloud = WordCloud(stopwords=stopwords).generate(text)
-
-  plt.imshow(wordcloud, interpolation='bilinear')
-  plt.axis("off")
-  plt.show()
+  stopwords.update(["This ,","An "])
 
   bike_mask = np.array(Image.open("../images/wordcloud_bike.png"))
   bike_mask
@@ -170,30 +106,10 @@ if __name__ == "__main__":
   # wc.to_file("../images/bike_wordcloud_after.png")
 
   # show
-  plt.figure(figsize=[20,10])
-  plt.imshow(wc, interpolation='bilinear')
-  plt.axis("off")
-  plt.show()
-
-  # bike_mask2 = np.array(Image.open("../images/wordcloud_bike_big.png"))
-  # bike_mask2
-
-  # bike_mask2[bike_mask2 == 0] = 255
-
-  # # Create a word cloud image
-  # wc = WordCloud(background_color="white", max_words=1000, mask=bike_mask,
-  #               stopwords=stopwords, contour_width=3)
-
-  # # Generate a wordcloud
-  # wc.generate(text)
-
-  # # store to file
-  # # wc.to_file("../images/bike_wordcloud_after.png")
-
-  # # show
-  # plt.figure(figsize=[30,15])
+  # plt.figure(figsize=[20,10])
   # plt.imshow(wc, interpolation='bilinear')
   # plt.axis("off")
+  # plt.savefig("../images/wordcloud_bike_after.png")
   # plt.show()
 
   all_df.corr(method ='pearson')
@@ -218,10 +134,6 @@ if __name__ == "__main__":
       tiles='Stamen Terrain'
   )
 
-  tooltip = 'Click me!'
-
-  folium.Marker([38.4965, -106.3254], popup='<i>Mt. Hood Meadows</i>', tooltip=tooltip).add_to(m)
-  folium.Marker([45.3311, -121.7113], popup='<b>Timberline Lodge</b>', tooltip=tooltip).add_to(m)
 
   m
 
@@ -280,3 +192,18 @@ if __name__ == "__main__":
 
   # all_df.groupby(["location","difficulty"])["stars"].agg([np.min,np.max,np.mean,np.median])
   all_df.groupby(["location","difficulty"])["stars"].mean()
+
+  # all_df.to_csv("../data/all_data.csv")
+
+print(all_df[all_df["location"]=="crested_butte"]["ascent"].mean())
+
+fig, ax = plt.subplots()
+
+ax.bar("Crested Butte",all_df[all_df["location"]=="crested_butte"]["ascent"].median())
+ax.bar("Marin County",all_df[all_df["location"]=="marin_county"]["ascent"].median())
+ax.bar("Moab",all_df[all_df["location"]=="moab"]["ascent"].median())
+ax.bar("Sedona",all_df[all_df["location"]=="sedona"]["ascent"].median())
+ax.bar("Park City",all_df[all_df["location"]=="park_city"]["ascent"].median())
+ax.bar("Denver",all_df[all_df["location"]=="denver"]["ascent"].median())
+plt.tight_layout()
+plt.show()
