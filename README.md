@@ -1,7 +1,8 @@
 # Mountain Biking Trail EDA: 
 ## What attributes are associated with highly rated trails?
 
-
+<img src="https://raw.githubusercontent.com/jeffbauerle/MTB-Trail-EDA/master/images/wordcloud_bike_after.png"
+    width="800" height="400"/>
 
 ## Background
 
