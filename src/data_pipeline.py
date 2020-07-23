@@ -205,5 +205,27 @@ ax.bar("Moab",all_df[all_df["location"]=="moab"]["ascent"].median())
 ax.bar("Sedona",all_df[all_df["location"]=="sedona"]["ascent"].median())
 ax.bar("Park City",all_df[all_df["location"]=="park_city"]["ascent"].median())
 ax.bar("Denver",all_df[all_df["location"]=="denver"]["ascent"].median())
+
+ax.set_xlabel('Location')
+ax.set_ylabel('Median Ascent Per Trail')
+ax.set_title('Median Ascent Per Trail by Location')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+
+
+fig, ax = plt.subplots()
+
+ax.bar("Crested Butte",all_df[all_df["location"]=="crested_butte"]["length"].median())
+ax.bar("Marin County",all_df[all_df["location"]=="marin_county"]["length"].median())
+ax.bar("Moab",all_df[all_df["location"]=="moab"]["length"].median())
+ax.bar("Sedona",all_df[all_df["location"]=="sedona"]["length"].median())
+ax.bar("Park City",all_df[all_df["location"]=="park_city"]["length"].median())
+ax.bar("Denver",all_df[all_df["location"]=="denver"]["length"].median())
+
+ax.set_xlabel('Location')
+ax.set_ylabel('Median Length Per Trail')
+ax.set_title('Median Length Per Trail by Location')
+plt.xticks(rotation=45)
 plt.tight_layout()
 plt.show()
