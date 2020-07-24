@@ -57,7 +57,7 @@ Selected locations from this list, plus local (Denver) and alleged birthplace of
 [The Top 10 Best Mountain Bike Destinations in the USA](https://www.singletracks.com/mtb-trails/the-top-10-best-mountain-bike-destinations-in-the-usa/)
 
 ### Data Pipeline
-
+Loaded JSON files into my Python script, converted and normalized dataframe. Added columns: ascent/mile, and descent/mile, recoded location
 
 
 ## Exploratory Data Analysis
