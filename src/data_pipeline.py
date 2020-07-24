@@ -18,6 +18,13 @@ def make_ax_bar(loc_dict, col):
   plt.xticks(rotation=45)
   return ax
 
+def make_ax_difficulty_bar(color_dict, col):
+  fig, ax = plt.subplots()
+  for color,code in color_dict.items():
+    ax.bar(color,all_df[all_df["difficulty"]==code[0]][col].mean(), color=code[1])
+  plt.xticks(rotation=45)
+  return ax
+
 def load_trail_df_from_file(filename, location_name):
   with open(filename) as data_file:
     data = json.load(data_file)
@@ -62,7 +69,7 @@ if __name__ == "__main__":
   crested_butte_df = load_trail_df_from_file(crested_butte_file, "crested_butte")
 
   loc_dict = {"denver":"Denver","crested_butte":"Crested Butte","marin_county":"Marin County","sedona":"Sedona","park_city":"Park City","moab":"Moab"}
-  color_dict = {"Green":"green","Green Blue":"#0d98ba","Blue":"blue","Blue Black":"#003366","Black":"black"}
+  color_dict = {"Green":["green","green"],"Green Blue":["greenBlue","#0d98ba"],"Blue":["blue","blue"],"Blue Black":["blueBlack","#003366"],"Black":["black","black"]}
 
   # MTB_Trail_Data_EDA
 
@@ -176,13 +183,7 @@ plt.show()
 
 # difficulty
 #Ascent
-fig, ax = plt.subplots()
-
-ax.bar("Green",all_df[all_df["difficulty"]=="green"]["ascent_per_trail"].mean(), color="green")
-ax.bar("Green Blue",all_df[all_df["difficulty"]=="greenBlue"]["ascent_per_trail"].mean(), color="#0d98ba")
-ax.bar("Blue",all_df[all_df["difficulty"]=="blue"]["ascent_per_trail"].mean(), color="blue")
-ax.bar("Blue Black",all_df[all_df["difficulty"]=="blueBlack"]["ascent_per_trail"].mean(), color="#003366")
-ax.bar("Black",all_df[all_df["difficulty"]=="black"]["ascent_per_trail"].mean(), color="black")
+ax = make_ax_difficulty_bar(color_dict,"ascent_per_trail")
 ax.bar("Double Black",all_df[all_df["difficulty"]=="dblack"]["ascent_per_trail"].mean(), color="white", hatch='*', edgecolor="black")
 
 ax.set_xlabel('Difficulty')
@@ -194,13 +195,7 @@ plt.tight_layout()
 plt.show()
 
 #Descent
-fig, ax = plt.subplots()
-
-ax.bar("Green",all_df[all_df["difficulty"]=="green"]["descent_per_trail"].mean(), color="green")
-ax.bar("Green Blue",all_df[all_df["difficulty"]=="greenBlue"]["descent_per_trail"].mean(), color="#0d98ba")
-ax.bar("Blue",all_df[all_df["difficulty"]=="blue"]["descent_per_trail"].mean(), color="blue")
-ax.bar("Blue Black",all_df[all_df["difficulty"]=="blueBlack"]["descent_per_trail"].mean(), color="#003366")
-ax.bar("Black",all_df[all_df["difficulty"]=="black"]["descent_per_trail"].mean(), color="black")
+ax = make_ax_difficulty_bar(color_dict,"descent_per_trail")
 ax.bar("Double Black",all_df[all_df["difficulty"]=="dblack"]["descent_per_trail"].mean(), color="white", hatch='*', edgecolor="black")
 
 ax.set_xlabel('Difficulty')
@@ -212,15 +207,8 @@ plt.tight_layout()
 plt.show()
 
 #Stars
-fig, ax = plt.subplots()
-
-ax.bar("Green",all_df[all_df["difficulty"]=="green"]["stars"].mean(), color="green")
-ax.bar("Green Blue",all_df[all_df["difficulty"]=="greenBlue"]["stars"].mean(), color="#0d98ba")
-ax.bar("Blue",all_df[all_df["difficulty"]=="blue"]["stars"].mean(), color="blue")
-ax.bar("Blue Black",all_df[all_df["difficulty"]=="blueBlack"]["stars"].mean(), color="#003366")
-ax.bar("Black",all_df[all_df["difficulty"]=="black"]["stars"].mean(), color="black")
+ax = make_ax_difficulty_bar(color_dict,"stars")
 ax.bar("Double Black",all_df[all_df["difficulty"]=="dblack"]["stars"].mean(), color="white", hatch='*', edgecolor="black")
-
 ax.set_xlabel('Difficulty')
 ax.set_ylabel('Mean Stars')
 ax.set_title('Mean Stars by Difficulty')
