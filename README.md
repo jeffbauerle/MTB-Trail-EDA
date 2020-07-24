@@ -51,9 +51,9 @@ Method: getTrails
 
 
 
-Regions considered:
+Regions considered: Denver, Crested Butte, Moab, Park City, Marin County, Sedona
 
-Selected locations from this list, plus local (Denver) and alleged birthplace of MTB (Marin County)
+Selected locations from this list, plus local (Denver) and alleged birthplace of MTB: Marin County; contested with Crested Butte
 
 [The Top 10 Best Mountain Bike Destinations in the USA](https://www.singletracks.com/mtb-trails/the-top-10-best-mountain-bike-destinations-in-the-usa/)
 
