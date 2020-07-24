@@ -11,20 +11,36 @@ from folium.plugins import HeatMap
 from PIL import Image
 import scipy.stats as stats
 
+def make_ax_bar(loc_dict, col):
+  fig, ax = plt.subplots()
+  for df,loc in loc_dict.items():
+    ax.bar(loc,all_df[all_df["location"]==df][col].mean())
+  plt.xticks(rotation=45)
+  return ax
+
+def load_trail_df_from_file(filename, location_name):
+  with open(filename) as data_file:
+    data = json.load(data_file)
+  data_trails = data['trails']
+  data_df = json_normalize(data_trails)
+  data_df["location"] = location_name
+  return data_df
 
 if __name__ == "__main__":
 
+
+
   # Denver
   denver_file = '../data/denver.json'
+  #denver = load_json_from_file(denver_file)
+  denver_df = load_trail_df_from_file(denver_file, "denver")
 
-  with open(denver_file) as denver_file:
-    denver = json.load(denver_file)
+  #with open(denver_file) as denver_file:
+  #  denver = json.load(denver_file)
 
   # Park City
   park_city_file = '../data/parkcity.json'
-
-  with open(park_city_file) as park_city_file:
-    park_city = json.load(park_city_file)
+  park_city_df = load_trail_df_from_file(denver_file, "park_city")
 
   # Moab
   moab_file = '../data/moab.json'
@@ -50,15 +66,15 @@ if __name__ == "__main__":
   with open(crested_butte_file) as crested_butte_file:
     crested_butte = json.load(crested_butte_file)
 
-  denver_trails = denver['trails']
-  denver_df = json_normalize(denver_trails)
-  denver_df["location"] = "denver"
+  # denver_trails = denver['trails']
+  # denver_df = json_normalize(denver_trails)
+  # denver_df["location"] = "denver"
 
   denver_df.head()
 
-  park_city_trails = park_city['trails']
-  park_city_df = json_normalize(park_city_trails)
-  park_city_df["location"] = "park_city"
+  # park_city_trails = park_city['trails']
+  # park_city_df = json_normalize(park_city_trails)
+  # park_city_df["location"] = "park_city"
 
   moab_trails = moab['trails']
   moab_df = json_normalize(moab_trails)
@@ -108,9 +124,6 @@ if __name__ == "__main__":
   # Generate a wordcloud
   wc.generate(text)
 
-  # store to file
-  # wc.to_file("../images/bike_wordcloud_after.png")
-
   # show
   # plt.figure(figsize=[20,10])
   # plt.imshow(wc, interpolation='bilinear')
@@ -120,15 +133,6 @@ if __name__ == "__main__":
 
   all_df.corr(method ='pearson')
 
-# All scatter matrix
-  # sns.pairplot(all_df)
-  # plt.show()
-
-  all_df.groupby("location")["length"].agg([np.min,np.max,np.mean,np.median])
-  all_df.groupby(["location"])["length"].median()
-  all_df.groupby(["location"])["ascent"].median()
-  all_df[all_df["length"] == 294.3]
-  all_df.info()
 
   m = folium.Map(
       location=[38.8697, -106.9878],
@@ -197,12 +201,7 @@ print(all_df[all_df["location"]=="crested_butte"]["ascent"].mean())
 
 # fig, ax = plt.subplots()
 
-def make_ax_bar(loc_dict, col):
-  fig, ax = plt.subplots()
-  for df,loc in loc_dict.items():
-    ax.bar(loc,all_df[all_df["location"]==df][col].mean())
-  plt.xticks(rotation=45)
-  return ax
+
 
 # Mean Ascent Per Trail
 ax = make_ax_bar(loc_dict,"ascent")
