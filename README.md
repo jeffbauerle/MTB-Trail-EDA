@@ -53,7 +53,7 @@ Method: getTrails
 
 Regions considered: Denver, Crested Butte, Moab, Park City, Marin County, Sedona
 
-Selected locations from this list, plus local (Denver) and alleged birthplace of MTB: Marin County; contested with Crested Butte
+Selected locations from this list, plus local (Denver) and alleged birthplace of MTB: Marin County; contested with Crested Butte.
 
 [The Top 10 Best Mountain Bike Destinations in the USA](https://www.singletracks.com/mtb-trails/the-top-10-best-mountain-bike-destinations-in-the-usa/)
 
@@ -68,6 +68,7 @@ Loaded JSON files into my Python script, converted and normalized dataframe. Add
     width="1000" height="500"/>
     <figcaption>Wordcloud generated from 81198 words in the combination of all summaries.</figcaption>
 </figure>
+
 
 
 I started out by looking at the correlation of stars to all other features included, but no highly correlated features of interest were found:
@@ -92,6 +93,7 @@ Notice that in ascent Denver is near the top of the list:
 
 Do Crested Butte and Denver have a steeper pitch or are they just longer? To explore this I added the descent per mile and ascent per mile columns to normalize the data.
 
+
 <img src="https://raw.githubusercontent.com/jeffbauerle/MTB-Trail-EDA/master/images/descent_per_mile.png">
 
 I also thought it would be interesting to also group the ascent per mile and descent per mile by difficulty.
@@ -108,7 +110,7 @@ Descent Per Mile by Difficulty is where I found the most interesting relationshi
 ## Conclusions
 People like most trails, rating them on average around 4 stars, regardless of difficulty type.
 
-Noticeable relationship between decent per mile and difficulty
+Noticeable relationship between decent per mile and difficulty.
 
 
 ## Further Work
@@ -116,5 +118,5 @@ Noticeable relationship between decent per mile and difficulty
 Look at regional differences in the relationship of decent per mile and difficulty, and perform a t-test.
 Subset word frequency / wordcloud for higher ranked trails and lower ranked trails.
 
-Look into clustering of trails by difficulty
+Look into clustering of trails by difficulty.
 [Link to interactive map](https://jeff-den18-capstones.s3-us-west-2.amazonaws.com/crested_butte_locations2.html)
