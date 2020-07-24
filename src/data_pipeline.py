@@ -161,7 +161,7 @@ all_df["descent_per_trail"] = all_df["descent"] / all_df["length"]
 
 # print(all_df["ascent_per_trail"].mean())
 
-#Ascent Per Trail
+# Mean Ascent Per Mile by Location
 ax = make_ax_bar(loc_dict,"ascent_per_trail")
 ax.set_xlabel('Location')
 ax.set_ylabel('Mean Ascent Per Mile Per Trail')
@@ -171,7 +171,17 @@ plt.tight_layout()
 # plt.savefig("../images/ascent_per_mile.png")
 plt.show()
 
-#Descent
+# Mean Descent Per Trail by Location
+ax = make_ax_bar(loc_dict,"descent")
+ax.set_xlabel('Location')
+ax.set_ylabel('Mean Descent Per Trail')
+ax.set_title('Mean Descent Per Trail by Location')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.savefig("../images/descent_per_trail.png")
+plt.show()
+
+# Mean Descent per Mile by Location
 ax = make_ax_bar(loc_dict,"descent_per_trail")
 ax.set_xlabel('Location')
 ax.set_ylabel('Mean Descent Per Mile Per Trail')
@@ -181,8 +191,8 @@ plt.tight_layout()
 # plt.savefig("../images/descent_per_mile.png")
 plt.show()
 
-# difficulty
-#Ascent
+# Difficulty
+# Ascent Per Mile by Difficulty
 ax = make_ax_difficulty_bar(color_dict,"ascent_per_trail")
 ax.bar("Double Black",all_df[all_df["difficulty"]=="dblack"]["ascent_per_trail"].mean(), color="white", hatch='*', edgecolor="black")
 
@@ -194,7 +204,7 @@ plt.tight_layout()
 # plt.savefig("../images/apm_by_difficulty.png")
 plt.show()
 
-#Descent
+#Descent Per Mile by Difficulty
 ax = make_ax_difficulty_bar(color_dict,"descent_per_trail")
 ax.bar("Double Black",all_df[all_df["difficulty"]=="dblack"]["descent_per_trail"].mean(), color="white", hatch='*', edgecolor="black")
 
@@ -206,7 +216,7 @@ plt.tight_layout()
 # plt.savefig("../images/dpm_by_difficulty.png")
 plt.show()
 
-#Stars
+# Stars by Difficulty
 ax = make_ax_difficulty_bar(color_dict,"stars")
 ax.bar("Double Black",all_df[all_df["difficulty"]=="dblack"]["stars"].mean(), color="white", hatch='*', edgecolor="black")
 ax.set_xlabel('Difficulty')
