@@ -53,6 +53,8 @@ Method: getTrails
 
 Regions considered: Denver, Crested Butte, Moab, Park City, Marin County, Sedona
 
+I pulled trails within 60 miles of the epicenter of each region (googled location latitude/longitude) with a max result of 200 trails per query.
+
 Selected locations from this list, plus local (Denver) and alleged birthplace of MTB: Marin County; contested with Crested Butte.
 
 [The Top 10 Best Mountain Bike Destinations in the USA](https://www.singletracks.com/mtb-trails/the-top-10-best-mountain-bike-destinations-in-the-usa/)
@@ -116,7 +118,11 @@ Noticeable relationship between decent per mile and difficulty.
 
 ## Further Work
 
-Look at regional differences in the relationship of decent per mile and difficulty, and perform a t-test.
+Perform a Z-test on the decent per mile by difficulty
+
+Also:
+Look at regional differences in the relationship of decent per mile and difficulty.
+
 Subset word frequency / wordcloud for higher ranked trails and lower ranked trails.
 
 Look into clustering of trails by difficulty.
