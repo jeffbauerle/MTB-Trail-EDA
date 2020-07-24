@@ -65,7 +65,7 @@ Loaded JSON files into my Python script, converted and normalized dataframe. Add
 
 <figure>
 <img src="https://raw.githubusercontent.com/jeffbauerle/MTB-Trail-EDA/master/images/wordcloud_bike_after.png"
-    width="800" height="400"/>
+    width="1000" height="500"/>
     <figcaption>Wordcloud generated from 81198 words in the combination of all summaries.</figcaption>
 </figure>
 
