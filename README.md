@@ -69,6 +69,7 @@ Loaded JSON files into my Python script, converted and normalized dataframe. Add
     <figcaption>Wordcloud generated from 81198 words in the combination of all summaries.</figcaption>
 </figure>
 
+<img src="https://raw.githubusercontent.com/jeffbauerle/MTB-Trail-EDA/master/images/stars_correlation.png">
 <img src="https://raw.githubusercontent.com/jeffbauerle/MTB-Trail-EDA/master/images/stars_by_difficulty.png">
 
 <img src="https://raw.githubusercontent.com/jeffbauerle/MTB-Trail-EDA/master/images/ascent_per_trail.png">
