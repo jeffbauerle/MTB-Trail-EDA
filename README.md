@@ -1,8 +1,11 @@
 # Mountain Biking Trail EDA: 
 ## What attributes are associated with highly rated trails?
 
+<figure>
 <img src="https://raw.githubusercontent.com/jeffbauerle/MTB-Trail-EDA/master/images/wordcloud_bike_after.png"
     width="800" height="400"/>
+    <figcaption>Wordcloud generated from 81198 words in the combination of all summaries.</figcaption>
+</figure>
 
 ## Background
 
@@ -62,9 +65,18 @@ Loaded JSON files into my Python script, converted and normalized dataframe. Add
 
 ## Exploratory Data Analysis
 
+
+<img src="https://raw.githubusercontent.com/jeffbauerle/MTB-Trail-EDA/master/images/stars_by_difficulty.png">
+
+<img src="https://raw.githubusercontent.com/jeffbauerle/MTB-Trail-EDA/master/images/ascent_per_trail.png">
+<img src="https://raw.githubusercontent.com/jeffbauerle/MTB-Trail-EDA/master/images/length_per_trail.png">
+<img src="https://raw.githubusercontent.com/jeffbauerle/MTB-Trail-EDA/master/images/descent_per_mile.png">
+<img src="https://raw.githubusercontent.com/jeffbauerle/MTB-Trail-EDA/master/images/apm_by_difficulty.png">
+<img src="https://raw.githubusercontent.com/jeffbauerle/MTB-Trail-EDA/master/images/dpm_by_difficulty.png">
+
+
 ### Subtitle
 
-![](src/readme/imgs/2343.jpg)
 
 ## Conclusions
 
