@@ -26,7 +26,16 @@ def load_trail_df_from_file(filename, location_name):
   data_df["location"] = location_name
   return data_df
 
+def update_map(color):
+  return folium.CircleMarker([row['latitude'], row['longitude']],
+                    radius=15,
+                    popup=row['name'],
+                    fill_color=color, # divvy color
+                  ).add_to(m)
+
 if __name__ == "__main__":
+
+  plt.rcParams.update({'font.size': 16})
 
   # Denver
   denver_file = '../data/denver.json'
@@ -53,6 +62,7 @@ if __name__ == "__main__":
   crested_butte_df = load_trail_df_from_file(crested_butte_file, "crested_butte")
 
   loc_dict = {"denver":"Denver","crested_butte":"Crested Butte","marin_county":"Marin County","sedona":"Sedona","park_city":"Park City","moab":"Moab"}
+  color_dict = {"Green":"green","Green Blue":"#0d98ba","Blue":"blue","Blue Black":"#003366","Black":"black"}
 
   # MTB_Trail_Data_EDA
 
@@ -83,8 +93,7 @@ if __name__ == "__main__":
   # plt.savefig("../images/wordcloud_bike_after.png")
   # plt.show()
 
-  all_df.corr(method ='pearson')
-
+  # all_df.corr(method ='pearson')
 
   m = folium.Map(
       location=[38.8697, -106.9878],
@@ -92,45 +101,19 @@ if __name__ == "__main__":
       tiles='Stamen Terrain'
   )
 
-
   for index, row in crested_butte_df.iterrows():
       if row['difficulty'] == 'black': 
-          folium.CircleMarker([row['latitude'], row['longitude']],
-                              radius=15,
-                              popup=row['name'],
-                              fill_color="#000000", # divvy color
-                            ).add_to(m)
+        update_map("#000000")
       elif row['difficulty'] == 'blue': 
-          folium.CircleMarker([row['latitude'], row['longitude']],
-                              radius=15,
-                              popup=row['name'],
-                              fill_color="#0000FF", # divvy color
-                            ).add_to(m)
+        update_map("#0000FF")
       elif row['difficulty'] == 'green': 
-          folium.CircleMarker([row['latitude'], row['longitude']],
-                              radius=15,
-                              popup=row['name'],
-                              fill_color="#008000", # divvy color
-                            ).add_to(m)
+        update_map("#008000")  
       elif row['difficulty'] == 'blueBlack': 
-          folium.CircleMarker([row['latitude'], row['longitude']],
-                              radius=15,
-                              popup=row['name'],
-                              fill_color="#003366", # divvy color
-                            ).add_to(m)
+        update_map("#003366")
       elif row['difficulty'] == 'greenBlue': 
-          folium.CircleMarker([row['latitude'], row['longitude']],
-                              radius=15,
-                              popup=row['name'],
-                              fill_color="#00DDDD", # divvy color
-                            ).add_to(m)
+        update_map("#00DDDD")
       elif row['difficulty'] == 'dblack': 
-          folium.CircleMarker([row['latitude'], row['longitude']],
-                              radius=15,
-                              popup=row['name'],
-                              fill_color="#000000", # divvy color
-                            ).add_to(m)
-
+        update_map("#000000")
 
   # convert to (n, 2) nd-array format for heatmap
   stationArr = crested_butte_df[['latitude', 'longitude']].to_numpy()
@@ -139,13 +122,7 @@ if __name__ == "__main__":
   m.add_children(plugins.HeatMap(stationArr, radius=15))
   # m
   m.save("../images/crested_butte_locations2.html")
-  # df_copy = crested_butte_df.copy()
-  # df_copy['count'] = 1
-  # HeatMap(data=df_copy[['latitude', 'longitude', 'count']].groupby(['latitude', 'longitude']).sum().reset_index().values.tolist(), radius=8, max_zoom=13).add_to(m)
-  # m
 
-  # all_df.groupby(["location","difficulty"])["stars"].agg([np.min,np.max,np.mean,np.median])
-  all_df.groupby(["location","difficulty"])["stars"].mean()
 
   # all_df.to_csv("../data/all_data.csv")
 
@@ -157,7 +134,9 @@ ax.set_xlabel('Location')
 ax.set_ylabel('Mean Ascent Per Trail')
 ax.set_title('Mean Ascent Per Trail by Location')
 plt.tight_layout()
+# plt.savefig("../images/ascent_per_trail.png")
 plt.show()
+
 
 # Mean Length Per Trail Plot
 ax = make_ax_bar(loc_dict,"length")
@@ -166,7 +145,9 @@ ax.set_ylabel('Mean Length Per Trail')
 ax.set_title('Mean Length Per Trail by Location')
 plt.xticks(rotation=45)
 plt.tight_layout()
+# plt.savefig("../images/length_per_trail.png")
 plt.show()
+
 
 all_df["ascent_per_trail"] = all_df["ascent"] / all_df["length"]
 all_df["descent_per_trail"] = all_df["descent"] / all_df["length"]
@@ -175,10 +156,12 @@ all_df["descent_per_trail"] = all_df["descent"] / all_df["length"]
 
 #Ascent Per Trail
 ax = make_ax_bar(loc_dict,"ascent_per_trail")
+ax.set_xlabel('Location')
 ax.set_ylabel('Mean Ascent Per Mile Per Trail')
 ax.set_title('Mean Ascent Per Mile by Location')
 plt.xticks(rotation=45)
 plt.tight_layout()
+# plt.savefig("../images/ascent_per_mile.png")
 plt.show()
 
 #Descent
@@ -188,6 +171,7 @@ ax.set_ylabel('Mean Descent Per Mile Per Trail')
 ax.set_title('Mean Descent Per Mile by Location')
 plt.xticks(rotation=45)
 plt.tight_layout()
+# plt.savefig("../images/descent_per_mile.png")
 plt.show()
 
 # difficulty
@@ -206,6 +190,7 @@ ax.set_ylabel('Mean Ascent Per Mile Per Trail')
 ax.set_title('Mean Ascent Per Mile by Difficulty')
 plt.xticks(rotation=45)
 plt.tight_layout()
+# plt.savefig("../images/apm_by_difficulty.png")
 plt.show()
 
 #Descent
@@ -219,10 +204,11 @@ ax.bar("Black",all_df[all_df["difficulty"]=="black"]["descent_per_trail"].mean()
 ax.bar("Double Black",all_df[all_df["difficulty"]=="dblack"]["descent_per_trail"].mean(), color="white", hatch='*', edgecolor="black")
 
 ax.set_xlabel('Difficulty')
-ax.set_ylabel('Mean Descent Per Mile Per Trail')
+ax.set_ylabel('Mean Descent Per Mile')
 ax.set_title('Mean Descent Per Mile by Difficulty')
 plt.xticks(rotation=45)
 plt.tight_layout()
+# plt.savefig("../images/dpm_by_difficulty.png")
 plt.show()
 
 #Stars
@@ -237,8 +223,9 @@ ax.bar("Double Black",all_df[all_df["difficulty"]=="dblack"]["stars"].mean(), co
 
 ax.set_xlabel('Difficulty')
 ax.set_ylabel('Mean Stars')
-ax.set_title('Difficulty')
+ax.set_title('Mean Stars by Difficulty')
 plt.xticks(rotation=45)
 plt.tight_layout()
+plt.savefig("../images/stars_by_difficulty.png")
 plt.show()
 
