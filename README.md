@@ -27,7 +27,9 @@ If there were features about the trails that were associated with its star ratin
 
 Method: getTrails
 
-|#  | column   | Non-null count  | DType  |
+<img src="https://raw.githubusercontent.com/jeffbauerle/MTB-Trail-EDA/master/images/raw_data_example.png">
+
+|#  | column   | Non-null count  | DType  | 
 |---|---|---|---|
 | 0  | id  |  1200 non-null | int64  |
 |  1 | name  | 1200 non-null  |  object |
@@ -52,6 +54,8 @@ Method: getTrails
 |   20| conditionStatus  | 1200 non-null  | object  |
 |   21| conditionDetails  | 868 non-null  | object  |
 |   22| conditionDate  | 1200 non-null  | object  |
+
+
 
 Regions considered:
 
@@ -79,9 +83,11 @@ Loaded JSON files into my Python script, converted and normalized dataframe. Add
 
 
 ## Conclusions
+People like most trails, rating them on average around 4 stars, regardless of difficulty type.
 
+Noticeable relationship between decent per mile and difficulty
 
 
 ## Further Work
 
-
+Look at regional differences in the relationship of decent per mile and difficulty, and perform a t-test.
