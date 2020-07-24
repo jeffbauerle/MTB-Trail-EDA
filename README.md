@@ -108,7 +108,8 @@ Descent Per Mile by Difficulty is where I found the most interesting relationshi
 
 
 ## Conclusions
-People like most trails, rating them on average around 4 stars, regardless of difficulty type.
+
+There weren't any features in my dataset highly associociated with star rating. People like most trails, rating them on average around 4 stars, regardless of difficulty type.
 
 Noticeable relationship between decent per mile and difficulty.
 
