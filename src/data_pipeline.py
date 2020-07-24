@@ -195,36 +195,26 @@ if __name__ == "__main__":
 
 print(all_df[all_df["location"]=="crested_butte"]["ascent"].mean())
 
-fig, ax = plt.subplots()
+# fig, ax = plt.subplots()
 
-for df,loc in loc_dict.items():
-  ax.bar(loc,all_df[all_df["location"]==df]["ascent"].mean())
+def make_ax_bar(loc_dict, col):
+  fig, ax = plt.subplots()
+  for df,loc in loc_dict.items():
+    ax.bar(loc,all_df[all_df["location"]==df][col].mean())
+  plt.xticks(rotation=45)
+  return ax
 
-
-# ax.bar("Crested Butte",all_df[all_df["location"]=="crested_butte"]["ascent"].mean())
-# ax.bar("Marin County",all_df[all_df["location"]=="marin_county"]["ascent"].mean())
-# ax.bar("Moab",all_df[all_df["location"]=="moab"]["ascent"].mean())
-# ax.bar("Sedona",all_df[all_df["location"]=="sedona"]["ascent"].mean())
-# ax.bar("Park City",all_df[all_df["location"]=="park_city"]["ascent"].mean())
-# ax.bar("Denver",all_df[all_df["location"]=="denver"]["ascent"].mean())
-
+# Mean Ascent Per Trail
+ax = make_ax_bar(loc_dict,"ascent")
 ax.set_xlabel('Location')
 ax.set_ylabel('Mean Ascent Per Trail')
 ax.set_title('Mean Ascent Per Trail by Location')
-plt.xticks(rotation=45)
 plt.tight_layout()
 plt.show()
 
 
-fig, ax = plt.subplots()
-
-ax.bar("Crested Butte",all_df[all_df["location"]=="crested_butte"]["length"].mean())
-ax.bar("Marin County",all_df[all_df["location"]=="marin_county"]["length"].mean())
-ax.bar("Moab",all_df[all_df["location"]=="moab"]["length"].mean())
-ax.bar("Sedona",all_df[all_df["location"]=="sedona"]["length"].mean())
-ax.bar("Park City",all_df[all_df["location"]=="park_city"]["length"].mean())
-ax.bar("Denver",all_df[all_df["location"]=="denver"]["length"].mean())
-
+# Mean Length Per Trail Plot
+ax = make_ax_bar(loc_dict,"length")
 ax.set_xlabel('Location')
 ax.set_ylabel('Mean Length Per Trail')
 ax.set_title('Mean Length Per Trail by Location')
@@ -236,18 +226,9 @@ all_df["ascent_per_trail"] = all_df["ascent"] / all_df["length"]
 all_df["descent_per_trail"] = all_df["descent"] / all_df["length"]
 
 # print(all_df["ascent_per_trail"].mean())
-#Ascent
 
-fig, ax = plt.subplots()
-
-ax.bar("Crested Butte",all_df[all_df["location"]=="crested_butte"]["ascent_per_trail"].mean())
-ax.bar("Marin County",all_df[all_df["location"]=="marin_county"]["ascent_per_trail"].mean())
-ax.bar("Moab",all_df[all_df["location"]=="moab"]["ascent_per_trail"].mean())
-ax.bar("Sedona",all_df[all_df["location"]=="sedona"]["ascent_per_trail"].mean())
-ax.bar("Park City",all_df[all_df["location"]=="park_city"]["ascent_per_trail"].mean())
-ax.bar("Denver",all_df[all_df["location"]=="denver"]["ascent_per_trail"].mean())
-
-ax.set_xlabel('Location')
+#Ascent Per Trail
+ax = make_ax_bar(loc_dict,"ascent_per_trail")
 ax.set_ylabel('Mean Ascent Per Mile Per Trail')
 ax.set_title('Mean Ascent Per Mile by Location')
 plt.xticks(rotation=45)
@@ -255,15 +236,7 @@ plt.tight_layout()
 plt.show()
 
 #Descent
-fig, ax = plt.subplots()
-
-ax.bar("Crested Butte",all_df[all_df["location"]=="crested_butte"]["descent_per_trail"].mean())
-ax.bar("Marin County",all_df[all_df["location"]=="marin_county"]["descent_per_trail"].mean())
-ax.bar("Moab",all_df[all_df["location"]=="moab"]["descent_per_trail"].mean())
-ax.bar("Sedona",all_df[all_df["location"]=="sedona"]["descent_per_trail"].mean())
-ax.bar("Park City",all_df[all_df["location"]=="park_city"]["descent_per_trail"].mean())
-ax.bar("Denver",all_df[all_df["location"]=="denver"]["descent_per_trail"].mean())
-
+ax = make_ax_bar(loc_dict,"descent_per_trail")
 ax.set_xlabel('Location')
 ax.set_ylabel('Mean Descent Per Mile Per Trail')
 ax.set_title('Mean Descent Per Mile by Location')
