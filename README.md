@@ -1,12 +1,6 @@
 # Mountain Biking Trail EDA: 
 ## What attributes are associated with highly rated trails?
 
-<figure>
-<img src="https://raw.githubusercontent.com/jeffbauerle/MTB-Trail-EDA/master/images/wordcloud_bike_after.png"
-    width="800" height="400"/>
-    <figcaption>Wordcloud generated from 81198 words in the combination of all summaries.</figcaption>
-</figure>
-
 ## Background
 
 I like to mountain bike. I enjoy looking at the "Best of" section of MTB Project's website to see what the most highly rated trails are, see if there's any new ones on the list, and target them for trips. I thought it would be interesting to see if there are any features about trails that leads them to be "highly rated", which get them on my radar. 
@@ -69,6 +63,11 @@ Loaded JSON files into my Python script, converted and normalized dataframe. Add
 
 ## Exploratory Data Analysis
 
+<figure>
+<img src="https://raw.githubusercontent.com/jeffbauerle/MTB-Trail-EDA/master/images/wordcloud_bike_after.png"
+    width="800" height="400"/>
+    <figcaption>Wordcloud generated from 81198 words in the combination of all summaries.</figcaption>
+</figure>
 
 <img src="https://raw.githubusercontent.com/jeffbauerle/MTB-Trail-EDA/master/images/stars_by_difficulty.png">
 
@@ -91,3 +90,5 @@ Noticeable relationship between decent per mile and difficulty
 ## Further Work
 
 Look at regional differences in the relationship of decent per mile and difficulty, and perform a t-test.
+Subset wordcloud for higher ranked trails and lower ranked trails.
+
