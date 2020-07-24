@@ -55,7 +55,7 @@ Regions considered: Denver, Crested Butte, Moab, Park City, Marin County, Sedona
 
 I pulled trails within 60 miles of the epicenter of each region (googled location latitude/longitude) with a max result of 200 trails per query.
 
-Selected locations from this list, plus local (Denver) and alleged birthplace of MTB: Marin County; contested with Crested Butte.
+Selected locations from this Singletracks.com list, plus local (Denver) and alleged birthplace of MTB: Marin County; contested with Crested Butte.
 
 [The Top 10 Best Mountain Bike Destinations in the USA](https://www.singletracks.com/mtb-trails/the-top-10-best-mountain-bike-destinations-in-the-usa/)
 
