@@ -28,83 +28,35 @@ def load_trail_df_from_file(filename, location_name):
 
 if __name__ == "__main__":
 
-
-
   # Denver
   denver_file = '../data/denver.json'
-  #denver = load_json_from_file(denver_file)
   denver_df = load_trail_df_from_file(denver_file, "denver")
-
-  #with open(denver_file) as denver_file:
-  #  denver = json.load(denver_file)
 
   # Park City
   park_city_file = '../data/parkcity.json'
-  park_city_df = load_trail_df_from_file(denver_file, "park_city")
+  park_city_df = load_trail_df_from_file(park_city_file, "park_city")
 
   # Moab
   moab_file = '../data/moab.json'
-
-  with open(moab_file) as moab_file:
-    moab = json.load(moab_file)
+  moab_df = load_trail_df_from_file(moab_file, "moab")
 
   # Sedona
   sedona_file = '../data/sedona.json'
-
-  with open(sedona_file) as sedona_file:
-    sedona = json.load(sedona_file)
+  sedona_df = load_trail_df_from_file(sedona_file, "sedona")
 
   # Marin County
   marin_county_file = '../data/marincounty.json'
-
-  with open(marin_county_file) as marin_county_file:
-    marin_county = json.load(marin_county_file)
+  marin_county_df = load_trail_df_from_file(marin_county_file, "marin_county")
 
   # Crested Butte
   crested_butte_file = '../data/crestedbutte.json'
-
-  with open(crested_butte_file) as crested_butte_file:
-    crested_butte = json.load(crested_butte_file)
-
-  # denver_trails = denver['trails']
-  # denver_df = json_normalize(denver_trails)
-  # denver_df["location"] = "denver"
-
-  denver_df.head()
-
-  # park_city_trails = park_city['trails']
-  # park_city_df = json_normalize(park_city_trails)
-  # park_city_df["location"] = "park_city"
-
-  moab_trails = moab['trails']
-  moab_df = json_normalize(moab_trails)
-  moab_df["location"] = "moab"
-
-  sedona_trails = sedona['trails']
-  sedona_df = json_normalize(sedona_trails)
-  sedona_df["location"] = "sedona"
-
-  marin_county_trails = marin_county['trails']
-  marin_county_df = json_normalize(marin_county_trails)
-  marin_county_df["location"] = "marin_county"
-
-  crested_butte_trails = crested_butte['trails']
-  crested_butte_df = json_normalize(crested_butte_trails)
-  crested_butte_df["location"] = "crested_butte"
-
-
-  proper_loc_list = ["Denver","Crested Butte","Marin County","Sedona","Park City","Moab"]
-  df_loc_list = ["denver","crested_butte","marin_county","sedona","park_city","moab"]
+  crested_butte_df = load_trail_df_from_file(crested_butte_file, "crested_butte")
 
   loc_dict = {"denver":"Denver","crested_butte":"Crested Butte","marin_county":"Marin County","sedona":"Sedona","park_city":"Park City","moab":"Moab"}
 
   # MTB_Trail_Data_EDA
 
   all_df = pd.concat([crested_butte_df, marin_county_df, denver_df, park_city_df, sedona_df, moab_df])
-
-  print(all_df.tail())
-
-  all_df.describe()
 
   text = " ".join(review for review in all_df.summary)
   print ("There are {} words in the combination of all review.".format(len(text)))
@@ -197,11 +149,7 @@ if __name__ == "__main__":
 
   # all_df.to_csv("../data/all_data.csv")
 
-print(all_df[all_df["location"]=="crested_butte"]["ascent"].mean())
-
 # fig, ax = plt.subplots()
-
-
 
 # Mean Ascent Per Trail
 ax = make_ax_bar(loc_dict,"ascent")
@@ -210,7 +158,6 @@ ax.set_ylabel('Mean Ascent Per Trail')
 ax.set_title('Mean Ascent Per Trail by Location')
 plt.tight_layout()
 plt.show()
-
 
 # Mean Length Per Trail Plot
 ax = make_ax_bar(loc_dict,"length")
@@ -242,7 +189,6 @@ ax.set_title('Mean Descent Per Mile by Location')
 plt.xticks(rotation=45)
 plt.tight_layout()
 plt.show()
-
 
 # difficulty
 #Ascent
@@ -296,32 +242,3 @@ plt.xticks(rotation=45)
 plt.tight_layout()
 plt.show()
 
-# def get_norm_coef(df):
-#   mean_df = df['ascent_per_trail'].mean()
-#   sqrt_df = np.sqrt(len(df['ascent_per_trail']))
-#   std = (df['ascent_per_trail'].std())/sqrt_df
-#   return mean_df, std
-
-# def normal_dist(mean, std):
-#   return stats.norm(loc=mean, scale=std)
-
-# fig, ax = plt.subplots()
-# x = np.linspace(0,180,180)
-
-# # mean_29, std_29 = get_norm_coef(df_29)
-# mean_275, std_275 = get_norm_coef(df_275)
-# # norm_29 = normal_dist(mean_29,std_29)
-# norm_275 = normal_dist(mean_275,std_275)
-# x1 = np.linspace(mean_275-6*std_275,mean_275+6*std_275,500)
-# # x2 = np.linspace(mean_29-6*std_29,mean_29*std_29,500)
-# # t_test = stats.ttest_ind(df_29['Price'],df_275['Price'],equal_var=False)
-# # Distribution of means plots
-# fig, ax = plt.subplots(figsize=(12,8))
-# x = np.linspace(2600,3600,2000)
-# ax.plot(x,norm_275.pdf(x),color='#C95948',label='27.5')
-# ax.plot(x,norm_29.pdf(x),color= '#4586AC',label='29')
-
-
-print(all_df[all_df["difficulty"]=="green"]["ascent_per_trail"].mean())
-
-print(all_df.groupby("descent_per_trail")["stars"].agg([np.min,np.max,np.mean,np.median]))
